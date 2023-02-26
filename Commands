@@ -1,0 +1,3 @@
+appium -p 4723 --use-plugins=images --allow-cors
+appium-doctor
+adb devices
