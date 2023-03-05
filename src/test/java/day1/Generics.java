@@ -3,8 +3,6 @@ package day1;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.touch.LongPressOptions;
-import io.appium.java_client.touch.TapOptions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -51,4 +49,5 @@ public class Generics {
         TouchAction touchAction = new TouchAction((PerformsTouchActions) driver);
         touchAction.tap(tapOptions().withElement(element(element)).withTapsCount(1)).perform();
     }
+
 }
