@@ -1,14 +1,18 @@
 package day1;
 
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
+import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofSeconds;
 
 
@@ -50,4 +54,16 @@ public class Generics {
         touchAction.tap(tapOptions().withElement(element(element)).withTapsCount(1)).perform();
     }
 
+    public static void swipeSlight(WebDriver driver) {
+        AppiumDriver aDriver = (AppiumDriver) driver;
+        TouchAction touchAction = new TouchAction(aDriver);
+        Dimension size = aDriver.manage().window().getSize();
+        System.out.println(size);
+        int startx = (int) (size.width / 2);
+        int endy = (int) (size.height * 0.5);
+        int starty = (int) (size.height * 0.6);
+        touchAction.press(point(startx, starty))
+                .waitAction(waitOptions(ofSeconds(1)))
+                .moveTo(point(startx, endy)).release().perform(); // Absolute final Co-ordinates
+    }
 }
