@@ -13,6 +13,7 @@ import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofSeconds;
 
 
@@ -65,5 +66,21 @@ public class Generics {
         touchAction.press(point(startx, starty))
                 .waitAction(waitOptions(ofSeconds(1)))
                 .moveTo(point(startx, endy)).release().perform(); // Absolute final Co-ordinates
+    }
+
+    /**
+     * verticalSwipeByPercentages(0.6, 0.3, 0.5);
+
+     */
+    public static void verticalSwipeByPercentages(WebDriver driver, double startPercentage, double endPercentage, double anchorPercentage) {
+        Dimension size = driver.manage().window().getSize();
+        int anchor = (int) (size.width * anchorPercentage);
+        int startPoint = (int) (size.height * startPercentage);
+        int endPoint = (int) (size.height * endPercentage);
+        new TouchAction((PerformsTouchActions) driver)
+                .press(point(anchor, startPoint))
+                .waitAction(waitOptions(ofMillis(1000)))
+                .moveTo(point(anchor, endPoint))
+                .release().perform();
     }
 }
